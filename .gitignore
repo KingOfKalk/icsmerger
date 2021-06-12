@@ -1,0 +1,7 @@
+build
+dist
+junit
+src/icsmerger/_version.py
+src/icsmerger*.egg-info
+.coverage
+cov.xml
