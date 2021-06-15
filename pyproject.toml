@@ -7,18 +7,19 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-write_to = "src/icsmerger/_version.py"
+write_to = "icsmerger/_version.py"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -q --cov=src/icsmerger --cov-report xml:cov.xml --cov-report term"
+addopts = "-ra -q --cov=icsmerger --cov-report xml:cov.xml --cov-report term"
 testpaths = [
-    "tests"
+    "icsmerger/tests"
 ]
 
 [tool.coverage.report]
 omit = [
-    "src/icsmerger/__init__.py",
-    "src/icsmerger/__main__.py",
-    "src/icsmerger/_version.py"
+    "icsmerger/__init__.py",
+    "icsmerger/__main__.py",
+    "icsmerger/_version.py",
+    "icsmerger/tests/*.py"
 ]

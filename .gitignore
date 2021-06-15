@@ -1,7 +1,7 @@
 build
 dist
 junit
-src/icsmerger/_version.py
-src/icsmerger*.egg-info
+icsmerger/_version.py
+icsmerger*.egg-info
 .coverage
 cov.xml
