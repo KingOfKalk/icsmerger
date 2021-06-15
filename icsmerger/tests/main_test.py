@@ -34,7 +34,7 @@ class TestMain(unittest.TestCase):
         actual = runner.invoke(merge.main, arguments)
         self.assertEqual(actual.exit_code, 0)
         self.assertEqual(actual.output, "")
-        get_ics_mock.assert_called_once_with(url)
+        get_ics_mock.assert_called_once_with(url, True)
         get_events_mock.assert_called_once_with(ics_content)
         create_calendar_mock.assert_called_once_with(events)
         print_mock.assert_called_once_with(calendar_str)
@@ -65,11 +65,27 @@ class TestMain(unittest.TestCase):
         actual = runner.invoke(merge.main, arguments)
         self.assertEqual(actual.exit_code, 0)
         self.assertEqual(actual.output, "")
-        get_ics_mock.assert_called_once_with(url)
+        get_ics_mock.assert_called_once_with(url, True)
         get_events_mock.assert_called_once_with(ics_content)
         create_calendar_mock.assert_called_once_with(events)
         print_mock.assert_not_called()
         save_calendar_mock.assert_called_once_with(calendar_str, out)
+
+    @unittest.mock.patch("builtins.print")
+    @unittest.mock.patch("ics.Calendar")
+    @unittest.mock.patch("icsmerger.merge.create_calendar")
+    @unittest.mock.patch("icsmerger.merge.get_events")
+    @unittest.mock.patch("icsmerger.merge.get_ics")
+    def test_with_ingore_http_error_option(self, get_ics_mock: unittest.mock.MagicMock, get_events_mock: unittest.mock.MagicMock, create_calendar_mock: unittest.mock.MagicMock, calendar_mock: unittest.mock.MagicMock, print_mock: unittest.mock.MagicMock):
+        url = "http://foo.bar"
+        arguments = [
+            "--ignore-http-errors",
+            url,
+        ]
+
+        runner = click.testing.CliRunner()
+        runner.invoke(merge.main, arguments)
+        get_ics_mock.assert_called_once_with(url, False)
 
 
 if __name__ == "__main__":

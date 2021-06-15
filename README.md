@@ -27,6 +27,15 @@ python -m icsmerger
 icsmerger -h
 ```
 
+### Ignore HTTP errors
+
+With this option HTTP status codes equals or greater 400 are ignored.
+Otherwise script will exit with error code 1.
+
+```
+icsmerger --ignore-http-errors https://returns-500.com/one.ics https://returns-401.com/one.ics
+```
+
 ### Output to *stdout*
 
 ```

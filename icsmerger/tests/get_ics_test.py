@@ -39,6 +39,18 @@ class TestGetIcs(unittest.TestCase):
         actual_text = merge.get_ics("https://python.org")
         self.assertEqual(actual_text, expected_text)
 
+    @unittest.mock.patch("sys.exit")
+    @unittest.mock.patch("requests.Response")
+    @unittest.mock.patch("requests.get")
+    def test_exits_with_error_code_when_http_error_occured(self, get_mock: unittest.mock.MagicMock, response_mock: unittest.mock.MagicMock, sys_exit_mock: unittest.mock.MagicMock):
+
+        response_mock.status_code = 500
+
+        get_mock.return_value = response_mock
+
+        merge.get_ics("https://python.org", True)
+        sys_exit_mock.assert_called_once_with(1)
+
 
 if __name__ == "__main__":
     unittest.main()
