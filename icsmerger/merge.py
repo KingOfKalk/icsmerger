@@ -17,7 +17,12 @@ def get_ics(url: str, exit_on_http_errors: bool = True) -> str:
     """
     Returns the ICS content.
     """
-    response = requests.get(url)
+    try:
+        response = requests.get(url)
+    except requests.exceptions.RequestException as e:
+        if exit_on_http_errors:
+            raise SystemExit(e)
+
     if response.status_code == 200:
         return response.text
     elif exit_on_http_errors and int(response.status_code) >= 400:

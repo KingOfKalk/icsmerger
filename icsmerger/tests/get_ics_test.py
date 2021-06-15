@@ -1,6 +1,6 @@
 import unittest
 import unittest.mock
-
+import requests.exceptions
 
 from icsmerger import merge
 
@@ -50,6 +50,14 @@ class TestGetIcs(unittest.TestCase):
 
         merge.get_ics("https://python.org", True)
         sys_exit_mock.assert_called_once_with(1)
+
+    @unittest.mock.patch("sys.exit")
+    @unittest.mock.patch("requests.get")
+    def test_exits_when_requests_throws_an_eception_and_exit_on_error_is_set(self, get_mock: unittest.mock.MagicMock, sys_exit_mock: unittest.mock.MagicMock):
+        get_mock.side_effect = requests.exceptions.RequestException('Kaputt')
+        with self.assertRaises(SystemExit) as context:
+            merge.get_ics("https://python.org", True)
+            self.assertTrue('Kaputt' in context.exception)
 
 
 if __name__ == "__main__":
