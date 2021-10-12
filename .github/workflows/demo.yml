@@ -21,8 +21,7 @@ jobs:
           pip install --editable .
       - name: run
         run: |
-          python -m icsmerger -o demo.ics https://i.cal.to/ical/34/fckoeln/bundesliga-spielplan/beb58269.df2ed49e-26ebd91e.ics https://calendar.google.com/calendar/ical/6eg1noirmh70doip6aa3gsmnis@group.calendar.google.com/public/basic.ics
-        
+          python -m icsmerger -o demo.ics http://i.cal.to/ical/34/fckoeln/bundesliga-spielplan/002db45d.07415847-cffb0f91.ics https://calendar.google.com/calendar/ical/6eg1noirmh70doip6aa3gsmnis@group.calendar.google.com/public/basic.ics
       - name: Upload demo.ics
         uses: svenstaro/upload-release-action@v2
         with:
