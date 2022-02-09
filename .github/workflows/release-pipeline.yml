@@ -1,10 +1,7 @@
-name: CI-Pipeline
+name: Release-Pipeline
 
 on:
   push:
-    # Sequence of patterns matched against refs/heads
-    branches:    
-      - main
     tags:        
       - v*
 
