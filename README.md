@@ -2,6 +2,10 @@
 
 A script to download and merge multiple online ICS resources into one ICS.
 
+[![CI-Pipeline](https://github.com/KingOfKalk/icsmerger/actions/workflows/ci-pipeline.yml/badge.svg)](https://github.com/KingOfKalk/icsmerger/actions/workflows/ci-pipeline.yml)
+[![Docker Image CI](https://github.com/KingOfKalk/icsmerger/actions/workflows/docker-image.yml/badge.svg)](https://github.com/KingOfKalk/icsmerger/actions/workflows/docker-image.yml)
+[![CodeQL](https://github.com/KingOfKalk/icsmerger/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/KingOfKalk/icsmerger/actions/workflows/codeql-analysis.yml)
+
 ## Run
 
 There are threw ways to run this script.
