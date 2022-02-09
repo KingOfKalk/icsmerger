@@ -4,8 +4,8 @@ A script to download and merge multiple online ICS resources into one ICS.
 
 ## Run
 
-There are two ways to run this script.
-Call the console script or via Python.
+There are threw ways to run this script.
+Call the console script, via Python or using Docker.
 
 ### Console script
 
@@ -17,6 +17,13 @@ icsmerger
 
 ```
 python -m icsmerger
+```
+
+### Docker
+
+```
+docker pull ghcr.io/kingofkalk/icsmerger:main
+docker run ghcr.io/kingofkalk/icsmerger python3 -m icsmerger -h
 ```
 
 ## Usage
