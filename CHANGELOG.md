@@ -2,6 +2,10 @@
 
 This is a list of notable changes to the project.
 
+## 0.0.4
+
+* Added support for Docker.
+
 ## 0.0.3
 
 * Implemented exception handling for HTTPS rqequests.
