@@ -26,8 +26,8 @@ python -m icsmerger
 ### Docker
 
 ```
-docker pull ghcr.io/kingofkalk/icsmerger:main
-docker run ghcr.io/kingofkalk/icsmerger python3 -m icsmerger -h
+docker pull ghcr.io/kingofkalk/icsmerger:latest
+docker run ghcr.io/kingofkalk/icsmerger:latest
 ```
 
 ## Usage
@@ -57,6 +57,39 @@ icsmerger https://url.to/one.ics https://url.to/second.ics
 
 ```
 icsmerger https://url.to/one.ics https://url.to/second.ics --out new.ics
+```
+
+## Docker
+
+### Entrypoint
+
+The entprypoint for the Docker version of icsmerger is the script itself.
+
+Just running the container will show the help message.
+
+```
+docker run ghcr.io/kingofkalk/icsmerger:latest
+```
+
+#### Example
+
+The following example command will run the icsmerger directly and the result will be show via stdout.
+
+```
+docker run ghcr.io/kingofkalk/icsmerger:latest https://example.com/demo1.ics https://example.com/demo2.ics
+```
+
+### Direcotry structure
+
+*/app/output* is the working directory of the iamge.
+With this you do not rely on *stdout* when merging ICS in a Docker setup.
+
+#### Example
+
+The following example will create a merged ics file called demo.ics in the current working directory.
+
+```
+docker run -v ./demo:/app/output icsmerger:latest -o demo.ics https://example.com/demo1.ics https://example.com/demo2.ics
 ```
 
 ## Development

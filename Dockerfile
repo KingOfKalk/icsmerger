@@ -6,5 +6,11 @@ WORKDIR /app
 
 COPY . .
 
+RUN mkdir output
 RUN pip3 install -r requirements.txt
 RUN pip3 install --editable .
+
+WORKDIR /app/output
+
+ENTRYPOINT ["icsmerger"]
+CMD ["-h"]
