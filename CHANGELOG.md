@@ -2,6 +2,20 @@
 
 This is a list of notable changes to the project.
 
+## [v0.0.8] - 2023-02-11
+
+- Prepares for ics v0.9.0.
+  See https://github.com/ics-py/ics-py/commit/f64c112dbacb2a49ad2ca53de8c579b5710ce992.
+
+## [v0.0.7] - 2023-02-11
+
+- Upgrades requirements and dev requirements.
+- Upgrades Docker base image to python 3.11-alpine.
+
+## [v0.0.6] - 2023-02-11
+
+- Updates GitHub Action [docker-image.yml](.github/workflows/docker-image.yml) to support multi-platform builds.
+
 ## [v0.0.5] - 2022-02-10
 
 - Optimized Docker image to use ENTRYPOINT and CMD better.
