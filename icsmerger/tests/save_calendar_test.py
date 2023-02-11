@@ -11,7 +11,7 @@ class TestSaveCalendar(unittest.TestCase):
     def test_save(self, calendar_mock: unittest.mock.MagicMock, open_mock: unittest.mock.MagicMock):
         expected_out = "calendar.ics"
         expected_write = "ics data"
-        calendar_mock.__str__ = unittest.mock.MagicMock(
+        calendar_mock.serialize = unittest.mock.MagicMock(
             return_value=expected_write)
         merge.save_calendar(calendar_mock, expected_out)
         open_mock.assert_called_with(expected_out, "w")
