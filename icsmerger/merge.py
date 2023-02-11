@@ -54,7 +54,7 @@ def save_calendar(calendar: ics.Calendar, out: str) -> None:
     Saves the calendar to a file.
     """
     with open(out, "w") as f:
-        f.write(str(calendar))
+        f.write(calendar.serialize())
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
