@@ -2,6 +2,20 @@
 
 This is a list of notable changes to the project.
 
+## [v1.0.0] - 2023-06-03
+
+- Updates dependencies, including dependencies for development. #15
+- Updates Dependabot settings. #14
+- Adds Dependabot version updates. #13
+- Bumps requests from 2.28.2 to 2.31.0 #12
+- Adds 2nd level dependcies to requirements list. #11
+- Removes manual trigger from Github workflow for building Docker images. #10
+- Enhances CodeQL workflow. #9
+- Upgrades CI-QA-Pipeline to run also on PR. #8
+- Updates change log.d #7
+- Sets correct Python versions for GitHub worflows. #6
+- Enhances GitHUb workflows. #5
+
 ## [v0.0.8] - 2023-02-11
 
 - Prepares for ics v0.9.0.
