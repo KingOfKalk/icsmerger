@@ -2,12 +2,12 @@
 Grabs ICS from the internat and merges them together.
 """
 import sys
+import typing
 
 
 import click
 import ics
 import requests
-import typing
 
 
 EXIT_CODE_ERROR = 1
