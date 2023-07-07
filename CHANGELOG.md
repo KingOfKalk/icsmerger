@@ -2,6 +2,13 @@
 
 This is a list of notable changes to the project.
 
+## [v1.0.1] - 2023-07-7
+
+- Bumps click from 8.1.3 to 8.1.4. #23
+- Bumps urllib3 from 1.26.14 to 2.0.3. #18, #20
+- Bumps pytest from 7.3.1 to 7.4.0. #21, #22
+- Implements GitHub Actions based Dependabot Version Updates . #17, #19
+
 ## [v1.0.0] - 2023-06-03
 
 - Updates dependencies, including dependencies for development. #15
