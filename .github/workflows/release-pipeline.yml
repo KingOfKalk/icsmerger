@@ -2,7 +2,7 @@ name: Release-Pipeline
 
 on:
   push:
-    tags:        
+    tags:
       - v*
 
 jobs:
@@ -42,7 +42,7 @@ jobs:
         with:
           name: pytest-results-${{ matrix.python-version }}
           path: junit/test-results-${{ matrix.python-version }}.xml
-        if: ${{ always() }}          
+        if: ${{ always() }}
 
       - name: Build package
         run: python -m build

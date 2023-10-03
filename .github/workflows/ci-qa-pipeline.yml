@@ -3,11 +3,11 @@ name: CI-QA-Pipeline
 on:
   workflow_dispatch:
   pull_request:
-    branches: [ main ]
+    branches: [main]
   push:
-    branches:    
+    branches:
       - main
-    tags:        
+    tags:
       - v*
 
 jobs:
@@ -47,7 +47,7 @@ jobs:
         with:
           name: pytest-results-${{ matrix.python-version }}
           path: junit/test-results-${{ matrix.python-version }}.xml
-        if: ${{ always() }}          
+        if: ${{ always() }}
 
   build-and-run-tests-inside-container:
     runs-on: ubuntu-latest
