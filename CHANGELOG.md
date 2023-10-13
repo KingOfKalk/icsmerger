@@ -2,6 +2,14 @@
 
 This is a list of notable changes to the project.
 
+## [v1.0.3] - 2023-10-13
+
+- Bumps urllib3 from 2.0.5 to 2.0.6. #48
+- Adds Python 3.12 to GitHub workflows. #49
+- Bumsp python from 3.11.5-alpine3.18 to 3.12.0-alpine3.18. #50
+
+**Full Changelog**: https://github.com/KingOfKalk/icsmerger/compare/v1.0.2...v1.0.3
+
 ## [v1.0.2] - 2023-10-02
 
 - Sets container base image to Python 3.11.4 and Alpine 3.18. #27
