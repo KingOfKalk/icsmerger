@@ -2,6 +2,23 @@
 
 This is a list of notable changes to the project.
 
+## [v1.0.4] - 2023-12-22
+
+- Bump github/codeql-action from 2 to 3. #64
+- Bump actions/upload-artifact from 3 to 4. #63
+- Bump actions/setup-python from 4 to 5. #62
+- Bump python from 3.12.0-alpine3.18 to 3.12.1-alpine3.18. #61
+- Bump idna from 3.4 to 3.6. #60
+- Bump certifi from 2023.7.22 to 2023.11.17. #59
+- Bump urllib3 from 2.0.7 to 2.1.0. #58
+- Bump charset-normalizer from 3.3.1 to 3.3.2. #57
+- Feat: Mititage TatSu's dropping of Python 3.10 support. #56
+- Bump pytest from 7.4.2 to 7.4.3. #54
+- Bump charset-normalizer from 3.3.0 to 3.3.1. #53
+- Bump urllib3 from 2.0.6 to 2.0.7. #51
+
+**Full Changelog**: https://github.com/KingOfKalk/icsmerger/compare/v1.0.3...v1.0.4
+
 ## [v1.0.3] - 2023-10-13
 
 - Bumps urllib3 from 2.0.5 to 2.0.6. #48
