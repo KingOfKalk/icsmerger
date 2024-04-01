@@ -2,6 +2,21 @@
 
 This is a list of notable changes to the project.
 
+## [v1.0.5] - 2024-04-01
+
+- Bump build from 1.0.3 to 1.2.1 (#81)
+- Bump pytest-cov from 4.1.0 to 5.0.0 (#79)
+- Bump pytest from 8.0.0 to 8.1.1 (#78)
+- Bump python-dateutil from 2.8.2 to 2.9.0.post0 (#77)
+- Bump urllib3 from 2.2.0 to 2.2.1 (#72)
+- Bump python from 3.12.1-alpine3.18 to 3.12.2-alpine3.18 (#71)
+- Bump certifi from 2023.11.17 to 2024.2.2 (#70)
+- Bump urllib3 from 2.1.0 to 2.2.0 (#69)
+- Bump pytest from 7.4.4 to 8.0.0 (#68)
+- Bump flake8 from 6.1.0 to 7.0.0 (#67)
+- Bump attrs from 23.1.0 to 23.2.0 (#66)
+- Bump pytest from 7.4.3 to 7.4.4 (#65)
+
 ## [v1.0.4] - 2023-12-22
 
 - Bump github/codeql-action from 2 to 3. #64
