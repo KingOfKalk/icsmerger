@@ -17,6 +17,8 @@ This is a list of notable changes to the project.
 - Bump attrs from 23.1.0 to 23.2.0 (#66)
 - Bump pytest from 7.4.3 to 7.4.4 (#65)
 
+**Full Changelog**: https://github.com/KingOfKalk/icsmerger/compare/v1.0.4...v1.0.5
+
 ## [v1.0.4] - 2023-12-22
 
 - Bump github/codeql-action from 2 to 3. #64
