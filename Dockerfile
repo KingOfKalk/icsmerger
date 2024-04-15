@@ -1,4 +1,4 @@
-FROM docker.io/python:3.12.2-alpine3.18 as build
+FROM docker.io/python:3.12.3-alpine3.18 as build
 
 RUN apk add --no-cache git
 
