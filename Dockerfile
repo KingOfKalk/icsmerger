@@ -1,4 +1,4 @@
-FROM docker.io/python:3.12.3-alpine3.18 as build
+FROM docker.io/python:3.12.3-alpine3.18 AS build
 
 RUN apk add --no-cache git
 
@@ -10,11 +10,11 @@ RUN mkdir output
 RUN pip3 install -r requirements.txt
 RUN pip3 install --editable .
 
-FROM build as test
+FROM build AS test
 RUN pip3 install -r requirements_dev.txt
 RUN pytest --no-cov .
 
-FROM build as production
+FROM build AS production
 WORKDIR /app/output
 
 ENTRYPOINT ["icsmerger"]
