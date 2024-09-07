@@ -2,6 +2,18 @@
 
 This is a list of notable changes to the project.
 
+## [v1.0.6] - 2024-09-07
+
+- Bump certifi from 2024.2.2 to 2024.7.4 by @dependabot in (#95)
+- Bump docker/build-push-action from 5 to 6 by @dependabot in (#94)
+- Bump flake8 from 7.0.0 to 7.1.0 by @dependabot in (#93)
+- Bump pytest from 8.1.1 to 8.2.2 by @dependabot in (#92)
+- Bump requests from 2.31.0 to 2.32.3 by @dependabot in (#90)
+- Bump python from 3.12.2-alpine3.18 to 3.12.3-alpine3.18 by @dependabot in (#85)
+- Bump idna from 3.6 to 3.7 by @dependabot in (#84)
+
+**Full Changelog**: https://github.com/KingOfKalk/icsmerger/compare/v1.0.5...v1.0.6
+
 ## [v1.0.5] - 2024-04-01
 
 - Bump build from 1.0.3 to 1.2.1 (#81)
