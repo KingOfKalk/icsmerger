@@ -10,4 +10,4 @@ requests==2.32.3
 six==1.16.0
 TatSu==5.8.3; python_version < '3.11'
 TatSu>=5.9.2; python_version > '3.10'
-urllib3==2.2.2
+urllib3==2.2.3
