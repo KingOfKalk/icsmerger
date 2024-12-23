@@ -2,6 +2,33 @@
 
 This is a list of notable changes to the project.
 
+## [v1.0.7] - 2024-12-23
+
+- Bump urllib3 from 2.2.3 to 2.3.0 (#118)
+- Bump click from 8.1.7 to 8.1.8 (#117)
+- Bump attrs from 24.2.0 to 24.3.0 (#116)
+- Bump certifi from 2024.8.30 to 2024.12.14 (#115)
+- Bump python from 3.13.0-alpine3.20 to 3.13.1-alpine3.20 (#114)
+- Bump six from 1.16.0 to 1.17.0 (#113)
+- Bump pytest from 8.3.3 to 8.3.4 (#112)
+- Bump pytest-cov from 5.0.0 to 6.0.0 (#111)
+- Bump python from 3.12.7-alpine3.20 to 3.13.0-alpine3.20 (#110)
+- Bump charset-normalizer from 3.3.2 to 3.4.0 (#109)
+- Bump build from 1.2.2 to 1.2.2.post1 (#108)
+- Updates Python and Alpine in container. (#107)
+- Bump idna from 3.8 to 3.10 (#106)
+- Bump urllib3 from 2.2.2 to 2.2.3 (#105)
+- Bump pytest from 8.3.2 to 8.3.3 (#104)
+- Bump urllib3 from 2.2.1 to 2.2.2 (#103)
+- Bump certifi from 2024.7.4 to 2024.8.30 (#102)
+- Bump pytest from 8.2.2 to 8.3.2 (#101)
+- Bump idna from 3.7 to 3.8 (#100)
+- Bump attrs from 23.2.0 to 24.2.0 (#99)
+- Bump build from 1.2.1 to 1.2.2 (#98)
+- Bump flake8 from 7.1.0 to 7.1.1 (#97)
+
+**Full Changelog**: https://github.com/KingOfKalk/icsmerger/compare/v1.0.6...v1.0.7
+
 ## [v1.0.6] - 2024-09-07
 
 - Bump certifi from 2024.2.2 to 2024.7.4 by @dependabot in (#95)
