@@ -11,6 +11,10 @@ A script to download and merge multiple online ICS resources into one ICS.
 There are threw ways to run this script.
 Call the console script, via Python or using Docker.
 
+### Requirements
+
+- Python >= 3.10
+
 ### Console script
 
 ```
