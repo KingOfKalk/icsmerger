@@ -4,6 +4,7 @@ This is a list of notable changes to the project.
 
 ## Development
 
+- Adds support for Python 3.13.
 - Removes support for Python 3.9.
 
 ## [v1.0.7] - 2024-12-23
