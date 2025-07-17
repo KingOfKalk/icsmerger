@@ -2,6 +2,11 @@
 
 This is a list of notable changes to the project.
 
+## Development
+
+- Adds support for Python 3.13.
+- Removes support for Python 3.9.
+
 ## [v1.0.7] - 2024-12-23
 
 - Bump urllib3 from 2.2.3 to 2.3.0 (#118)
