@@ -2,7 +2,35 @@
 
 This is a list of notable changes to the project.
 
-## Development
+## [v1.1.0] - 2025-07-18
+
+- chore(deps): Bump urllib3 from 2.4.0 to 2.5.0 (#148)
+- chore(deps-dev): Bump flake8 from 7.2.0 to 7.3.0 (#147)
+- feat: Adds support for Python 3.13, removes support for Python 3.9. (#146)
+- chore(deps): Bump certifi from 2025.4.26 to 2025.7.14 (#145)
+- chore(deps-dev): Bump pytest from 8.3.5 to 8.4.1 (#143)
+- chore(deps-dev): Bump pytest-cov from 6.1.1 to 6.2.1 (#141)
+- chore(deps): Bump requests from 2.32.3 to 2.32.4 (#139)
+- chore(deps): Bump click from 8.1.8 to 8.2.1 (#137)
+- chore(deps): Bump charset-normalizer from 3.4.1 to 3.4.2 (#135)
+- chore(deps): Bump certifi from 2025.1.31 to 2025.4.26 (#134)
+- chore(deps): Bump python from 3.13.2-alpine3.20 to 3.13.3-alpine3.20 (#133)
+- chore(deps): Bump urllib3 from 2.3.0 to 2.4.0 (#132)
+- chore(deps-dev): Bump pytest-cov from 6.0.0 to 6.1.1 (#131)
+- chore(deps-dev): Bump flake8 from 7.1.2 to 7.2.0 (#129)
+- chore(deps): Bump attrs from 25.2.0 to 25.3.0 (#128)
+- chore(deps): Bump attrs from 25.1.0 to 25.2.0 (#127)
+- chore(deps-dev): Bump pytest from 8.3.4 to 8.3.5 (#126)
+- chore(deps-dev): Bump flake8 from 7.1.1 to 7.1.2 (#125)
+- chore(deps): Bump python from 3.13.1-alpine3.20 to 3.13.2-alpine3.20 (#123)
+- chore(deps): Bump certifi from 2024.12.14 to 2025.1.31 (#122)
+- chore(deps): Bump attrs from 24.3.0 to 25.1.0 (#121)
+- chore(deps): Bump tatsu from 5.8.3 to 5.13.1 (#120)
+- chore(deps): Bump charset-normalizer from 3.4.0 to 3.4.1 (#119)
+
+**Full Changelog**: https://github.com/KingOfKalk/icsmerger/compare/v1.0.7...v1.1.0
+
+### Important Notes
 
 - Adds support for Python 3.13.
 - Removes support for Python 3.9.
