@@ -44,8 +44,10 @@ icsmerger -h
 
 ### Ignore HTTP errors
 
-With this option HTTP status codes equals or greater 400 are ignored.
-Otherwise script will exit with error code 1.
+With this option a feed that cannot be fetched (connection error, timeout,
+HTTP status other than 200) or parsed (e.g. an HTML page) is skipped with a
+warning on stderr. The remaining feeds are still merged.
+Otherwise script prints the error and exits with error code 1.
 
 ```
 icsmerger --ignore-http-errors https://returns-500.com/one.ics https://returns-401.com/one.ics
