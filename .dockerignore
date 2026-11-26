@@ -1,7 +1,6 @@
 **/.vscode
 **/build
 **/dist
-.github
 .worktrees
 **/__pycache__
 *.egg-info
