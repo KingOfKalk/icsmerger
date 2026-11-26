@@ -19,13 +19,11 @@ RUN pytest --no-cov .
 
 FROM docker.io/python:3.14.10-alpine3.24 AS production
 
-WORKDIR /app
-
 # Runtime dependencies and the wheel only: no git, .git, tests or source tree.
-COPY requirements.txt .
-COPY --from=build /dist /dist
-RUN pip3 install --no-cache-dir -r requirements.txt /dist/*.whl \
-    && rm -rf /dist requirements.txt
+# Bind mounts keep requirements.txt and the wheel out of the image layers.
+RUN --mount=type=bind,from=build,source=/dist,target=/dist \
+    --mount=type=bind,source=requirements.txt,target=/requirements.txt \
+    pip3 install --no-cache-dir -r /requirements.txt /dist/*.whl
 
 WORKDIR /app/output
 
