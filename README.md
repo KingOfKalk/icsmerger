@@ -2,13 +2,13 @@
 
 A script to download and merge multiple online ICS resources into one ICS.
 
-[![CI-QA-Pipeline](https://github.com/KingOfKalk/icsmerger/actions/workflows/ci-qa-pipeline.yml/badge.svg)](https://github.com/KingOfKalk/icsmerger/actions/workflows/ci-qa-pipeline.yml)
-[![Docker Image CI](https://github.com/KingOfKalk/icsmerger/actions/workflows/docker-image.yml/badge.svg)](https://github.com/KingOfKalk/icsmerger/actions/workflows/docker-image.yml)
+[![CI](https://github.com/KingOfKalk/icsmerger/actions/workflows/ci.yml/badge.svg)](https://github.com/KingOfKalk/icsmerger/actions/workflows/ci.yml)
+[![Release](https://github.com/KingOfKalk/icsmerger/actions/workflows/release.yml/badge.svg)](https://github.com/KingOfKalk/icsmerger/actions/workflows/release.yml)
 [![CodeQL](https://github.com/KingOfKalk/icsmerger/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/KingOfKalk/icsmerger/actions/workflows/codeql-analysis.yml)
 
 ## Run
 
-There are threw ways to run this script.
+There are three ways to run this script.
 Call the console script, via Python or using Docker.
 
 ### Requirements
@@ -67,7 +67,7 @@ icsmerger https://url.to/one.ics https://url.to/second.ics --out new.ics
 
 ### Entrypoint
 
-The entprypoint for the Docker version of icsmerger is the script itself.
+The entrypoint for the Docker version of icsmerger is the script itself.
 
 Just running the container will show the help message.
 
@@ -83,9 +83,9 @@ The following example command will run the icsmerger directly and the result wil
 docker run ghcr.io/kingofkalk/icsmerger:latest https://example.com/demo1.ics https://example.com/demo2.ics
 ```
 
-### Direcotry structure
+### Directory structure
 
-*/app/output* is the working directory of the iamge.
+*/app/output* is the working directory of the image.
 With this you do not rely on *stdout* when merging ICS in a Docker setup.
 
 #### Example
@@ -93,7 +93,7 @@ With this you do not rely on *stdout* when merging ICS in a Docker setup.
 The following example will create a merged ics file called demo.ics in the current working directory.
 
 ```
-docker run -v ./demo:/app/output icsmerger:latest -o demo.ics https://example.com/demo1.ics https://example.com/demo2.ics
+docker run -v ./demo:/app/output ghcr.io/kingofkalk/icsmerger:latest -o demo.ics https://example.com/demo1.ics https://example.com/demo2.ics
 ```
 
 ## Development
@@ -105,7 +105,7 @@ pip install -r requirements.txt
 pip install -r requirements_dev.txt
 ```
 
-In directory *tests* you will find the unit tests.
+In directory *icsmerger/tests* you will find the unit tests.
 
 ### Run tests
 
