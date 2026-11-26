@@ -73,6 +73,7 @@ jobs:
   # platform. docker buildx CLI instead of docker/* actions: only GitHub-owned
   # actions are allowed. arm64 builds natively on the arm runner.
   container:
+    name: container (${{ matrix.platform }})
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 30
     permissions:
