@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  lint:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.14"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_dev.txt
+      - name: Lint with flake8
+        run: |
+          flake8 icsmerger --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 icsmerger --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Check JSON syntax
+        run: |
+          git ls-files -z '*.json' | while IFS= read -r -d '' f; do
+            echo "$f"
+            jq empty "$f"
+          done
+
+  test:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements_dev.txt
+          pip install --editable .
+      - name: Test with pytest
+        env:
+          PYTHON_VERSION: ${{ matrix.python-version }}
+        run: pytest --junitxml="junit/test-results-${PYTHON_VERSION}.xml"
+      - name: Upload pytest test results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pytest-results-${{ matrix.python-version }}
+          path: junit/test-results-${{ matrix.python-version }}.xml
+
+  # Builds the Dockerfile's test stage (runs pytest inside the image) per
+  # platform. docker buildx CLI instead of docker/* actions: only GitHub-owned
+  # actions are allowed. arm64 builds natively on the arm runner.
+  container:
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-26.04
+          - platform: linux/arm64
+            runner: ubuntu-26.04-arm
+          - platform: linux/arm/v7
+            runner: ubuntu-26.04
+            qemu: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # No runner executes 32-bit ARM natively, so linux/arm/v7 runs under
+      # QEMU. Ubuntu's qemu-user-binfmt registers the static qemu binaries
+      # with binfmt_misc (fix-binary flag, so they work inside build
+      # containers) instead of docker/setup-qemu-action, which is third-party
+      # and pulls the tonistiigi/binfmt image.
+      - name: Set up QEMU
+        if: matrix.qemu
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends qemu-user-binfmt
+          cat /proc/sys/fs/binfmt_misc/qemu-arm
+          grep -qE '^flags: .*F' /proc/sys/fs/binfmt_misc/qemu-arm
+      - name: Docker
+        run: |
+          docker version
+          docker buildx version
+          docker buildx inspect
+      - name: Build test stage (${{ matrix.platform }})
+        env:
+          PLATFORM: ${{ matrix.platform }}
+        run: |
+          docker buildx build --platform "$PLATFORM" --target test \
+            --provenance=false --sbom=false .
+
+  # The single required status check in the main ruleset: succeeds only if
+  # every job above succeeded (skipped or cancelled jobs fail it too).
+  checks:
+    needs: [lint, test, container]
+    if: always()
+    runs-on: ubuntu-26.04
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: Check results
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          jq -r 'to_entries[] | "\(.key): \(.value.result)"' <<< "$NEEDS"
+          jq -e 'all(.[]; .result == "success")' <<< "$NEEDS" > /dev/null
