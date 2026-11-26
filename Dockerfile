@@ -1,4 +1,5 @@
-FROM docker.io/python:3.13.3-alpine3.20 AS build
+# Dependabot keeps the -alpineX.Y suffix; bump it by hand when a new Alpine release is out.
+FROM docker.io/python:3.14.10-alpine3.24 AS build
 
 RUN apk add --no-cache git
 
