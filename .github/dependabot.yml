@@ -1,14 +1,41 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"
-    directory: "/"
+  # Runtime dependencies: listed under Bug Fixes. Development dependencies
+  # (requirements_dev.txt): listed under Chores.
+  - package-ecosystem: pip
+    directory: /
     schedule:
-      interval: "daily"
-  - package-ecosystem: "docker"
-    directory: "/"
+      interval: weekly
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
+    labels:
+      - fix
+    ignore:
+      # ics 0.7.2 breaks with TatSu 5.16 and newer (#194).
+      - dependency-name: tatsu
+        versions:
+          - ">=5.16"
+
+  # Base image of the published container: listed under Bug Fixes.
+  - package-ecosystem: docker
+    directory: /
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "github-actions"
-    directory: "/"
+      interval: weekly
+    commit-message:
+      prefix: fix
+      include: scope
+    labels:
+      - fix
+
+  # CI only: listed under Chores.
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
+    commit-message:
+      prefix: chore
+      include: scope
+    labels:
+      - chore
