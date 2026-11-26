@@ -1,13 +1,12 @@
 [build-system]
 requires = [
-    "setuptools>=42",
+    "setuptools>=77.0.3",
     "setuptools_scm[toml]>=6.0",
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-write_to = "icsmerger/_version.py"
 
 [tool.pytest.ini_options]
 minversion = "7.2"
@@ -20,6 +19,5 @@ testpaths = [
 omit = [
     "icsmerger/__init__.py",
     "icsmerger/__main__.py",
-    "icsmerger/_version.py",
     "icsmerger/tests/*.py"
 ]
