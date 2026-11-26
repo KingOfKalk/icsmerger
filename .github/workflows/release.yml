@@ -1,0 +1,113 @@
+name: Release assets
+
+# release-please publishes the release with the release App's token, so this
+# event triggers workflows (events caused by GITHUB_TOKEN would not).
+on:
+  release:
+    types:
+      - published
+
+permissions: {}
+
+env:
+  IMAGE: ghcr.io/kingofkalk/icsmerger
+  PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
+
+jobs:
+  # Python package (sdist and wheel), attached to the release.
+  package:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # Tags and history: setuptools_scm derives the version from the tag.
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.14"
+      - name: Install build
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_dev.txt
+      - name: Build package
+        run: python -m build
+      - name: Check version
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          ls -l dist
+          version="${TAG#v}"
+          compgen -G "dist/*-${version}.tar.gz" > /dev/null
+          compgen -G "dist/*-${version}-*.whl" > /dev/null
+      - name: Upload to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$TAG" dist/* --clobber --repo "$GITHUB_REPOSITORY"
+
+  # Multi-arch image, target production. docker buildx CLI instead of
+  # docker/* actions: only GitHub-owned actions are allowed.
+  image:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # The image build copies .git; setuptools_scm derives the version
+          # from the tag.
+          fetch-depth: 0
+      # arm64 and arm/v7 run under QEMU. Ubuntu's qemu-user-binfmt registers
+      # the static qemu binaries with binfmt_misc (fix-binary flag, so they
+      # work inside build containers) instead of docker/setup-qemu-action,
+      # which is third-party and pulls the tonistiigi/binfmt image.
+      - name: Set up QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends qemu-user-binfmt
+          for arch in aarch64 arm; do
+            cat "/proc/sys/fs/binfmt_misc/qemu-$arch"
+            grep -qE '^flags: .*F' "/proc/sys/fs/binfmt_misc/qemu-$arch"
+          done
+      - name: Docker
+        run: |
+          docker version
+          docker buildx version
+          docker buildx inspect
+      - name: Log in to ghcr.io
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin <<< "$GH_TOKEN"
+      # Same tags as before: the release tag (vX.Y.Z) and latest.
+      - name: Build and push
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "unexpected release tag: $TAG" >&2
+            exit 1
+          fi
+          source="https://github.com/${GITHUB_REPOSITORY}"
+          # No provenance/SBOM attestations: they add unknown/unknown
+          # manifests to the index. The index annotation links the package
+          # to this repository on ghcr.io.
+          docker buildx build --platform "$PLATFORMS" --target production \
+            --provenance=false --sbom=false \
+            --label "org.opencontainers.image.source=${source}" \
+            --label "org.opencontainers.image.revision=${GITHUB_SHA}" \
+            --label "org.opencontainers.image.version=${TAG}" \
+            --annotation "index:org.opencontainers.image.source=${source}" \
+            --annotation "index:org.opencontainers.image.revision=${GITHUB_SHA}" \
+            --annotation "index:org.opencontainers.image.version=${TAG}" \
+            -t "${IMAGE}:${TAG}" -t "${IMAGE}:latest" \
+            --push .
+      - name: Log out
+        if: always()
+        run: docker logout ghcr.io
