@@ -2,6 +2,64 @@
 
 This is a list of notable changes to the project.
 
+## [1.2.0](https://github.com/KingOfKalk/icsmerger/compare/v1.1.0...v1.2.0) (2026-11-26)
+
+
+### Features
+
+* **github:** Add Python 3.14 to GitHub workflows. ([#164](https://github.com/KingOfKalk/icsmerger/issues/164)) ([d968f36](https://github.com/KingOfKalk/icsmerger/commit/d968f36fa33a58a5938598d025e704999cb4fef5))
+
+
+### Bug Fixes
+
+* **deps:** Bump attrs from 25.4.0 to 26.1.0 ([#197](https://github.com/KingOfKalk/icsmerger/issues/197)) ([12d50e0](https://github.com/KingOfKalk/icsmerger/commit/12d50e053bc253759835a5df8772fd1a552f1e07))
+* **deps:** Bump certifi from 2026.1.4 to 2026.11.20 ([#203](https://github.com/KingOfKalk/icsmerger/issues/203)) ([cc3f4e4](https://github.com/KingOfKalk/icsmerger/commit/cc3f4e48f161084310cd2db691c4f7abbbda6687))
+* **deps:** Bump charset-normalizer from 3.4.4 to 3.5.3 ([#204](https://github.com/KingOfKalk/icsmerger/issues/204)) ([9e8c664](https://github.com/KingOfKalk/icsmerger/commit/9e8c664496bba0dc947ba431d1791b733bdcba08))
+* **deps:** pin TatSu to 5.15.1 ([#195](https://github.com/KingOfKalk/icsmerger/issues/195)) ([26e1d7c](https://github.com/KingOfKalk/icsmerger/commit/26e1d7ca5dc6843f89cd6d0aa67cc973ef505cf3))
+
+
+### Continuous Integration
+
+* adopt release-please, Dependabot auto-merge and hardened workflows ([#201](https://github.com/KingOfKalk/icsmerger/issues/201)) ([c529843](https://github.com/KingOfKalk/icsmerger/commit/c5298434ace1b6b6976b9436e50e0a0234bc01d1))
+
+
+### Chores
+
+* **deps-dev:** Bump build from 1.2.2.post1 to 1.3.0 ([#150](https://github.com/KingOfKalk/icsmerger/issues/150)) ([dd6d3e1](https://github.com/KingOfKalk/icsmerger/commit/dd6d3e166c4cb5d23a4f4168172240c325d4737e))
+* **deps-dev:** Bump build from 1.3.0 to 1.4.0 ([#186](https://github.com/KingOfKalk/icsmerger/issues/186)) ([3160729](https://github.com/KingOfKalk/icsmerger/commit/31607293ae8d099ed9e7a5da1c777fee0ee4d370))
+* **deps-dev:** Bump build from 1.4.0 to 1.6.1 ([#205](https://github.com/KingOfKalk/icsmerger/issues/205)) ([21576a6](https://github.com/KingOfKalk/icsmerger/commit/21576a6551a82e323c884ad2a2aab90f11640270))
+* **deps-dev:** Bump pytest from 8.4.1 to 8.4.2 ([#155](https://github.com/KingOfKalk/icsmerger/issues/155)) ([aaf0d9c](https://github.com/KingOfKalk/icsmerger/commit/aaf0d9cbe6a5018faaed38a688c6fab70363200f))
+* **deps-dev:** Bump pytest from 8.4.2 to 9.0.1 ([#171](https://github.com/KingOfKalk/icsmerger/issues/171)) ([1b02d93](https://github.com/KingOfKalk/icsmerger/commit/1b02d93b6764c7d50ab67c7fc1bb2389525f9bd5))
+* **deps-dev:** Bump pytest from 9.0.1 to 9.0.2 ([#177](https://github.com/KingOfKalk/icsmerger/issues/177)) ([63d6e0b](https://github.com/KingOfKalk/icsmerger/commit/63d6e0b4c22313f6029017018925a66274e1e8d8))
+* **deps-dev:** Bump pytest-cov from 6.2.1 to 7.0.0 ([#158](https://github.com/KingOfKalk/icsmerger/issues/158)) ([ee0eed4](https://github.com/KingOfKalk/icsmerger/commit/ee0eed4d83d032dba13fcd1aaa09310fed8cd644))
+* **deps-dev:** Bump pytest-cov from 7.0.0 to 7.1.0 ([#198](https://github.com/KingOfKalk/icsmerger/issues/198)) ([3cf6665](https://github.com/KingOfKalk/icsmerger/commit/3cf66655dd37b54aa3f1d08b3f4a0903670f51da))
+* **deps:** Bump actions/checkout from 4 to 5 ([#153](https://github.com/KingOfKalk/icsmerger/issues/153)) ([5956e98](https://github.com/KingOfKalk/icsmerger/commit/5956e98f13098a08fb5fe906453395374b88b682))
+* **deps:** Bump actions/checkout from 5 to 6 ([#173](https://github.com/KingOfKalk/icsmerger/issues/173)) ([c9918d3](https://github.com/KingOfKalk/icsmerger/commit/c9918d32ce0bdd2c7a41d7d0ca14c76f474fcdf2))
+* **deps:** Bump actions/setup-python from 5 to 6 ([#156](https://github.com/KingOfKalk/icsmerger/issues/156)) ([79d16a2](https://github.com/KingOfKalk/icsmerger/commit/79d16a2915427632daba710510fbe42991c33dc5))
+* **deps:** Bump actions/upload-artifact from 4 to 5 ([#169](https://github.com/KingOfKalk/icsmerger/issues/169)) ([c35e8f2](https://github.com/KingOfKalk/icsmerger/commit/c35e8f2b78342325915d7a80bbc25bdaad906cfb))
+* **deps:** Bump actions/upload-artifact from 5 to 6 ([#181](https://github.com/KingOfKalk/icsmerger/issues/181)) ([a4fb813](https://github.com/KingOfKalk/icsmerger/commit/a4fb81394e19afff5660421f729407ea835f1554))
+* **deps:** Bump arrow from 1.3.0 to 1.4.0 ([#168](https://github.com/KingOfKalk/icsmerger/issues/168)) ([e8ccfd8](https://github.com/KingOfKalk/icsmerger/commit/e8ccfd89a6a57d8379c9d440d1335d91315b5743))
+* **deps:** Bump attrs from 25.3.0 to 25.4.0 ([#162](https://github.com/KingOfKalk/icsmerger/issues/162)) ([28db129](https://github.com/KingOfKalk/icsmerger/commit/28db12945609d2b8c1bb04e8ebdd877d94ab0347))
+* **deps:** Bump certifi from 2025.10.5 to 2025.11.12 ([#172](https://github.com/KingOfKalk/icsmerger/issues/172)) ([636643a](https://github.com/KingOfKalk/icsmerger/commit/636643a09d0b2e522d5bd89dda620929b955547c))
+* **deps:** Bump certifi from 2025.11.12 to 2026.1.4 ([#183](https://github.com/KingOfKalk/icsmerger/issues/183)) ([7b15f7a](https://github.com/KingOfKalk/icsmerger/commit/7b15f7ad6558ccf6b5badb798de26c6c6533ee6f))
+* **deps:** Bump certifi from 2025.7.14 to 2025.8.3 ([#151](https://github.com/KingOfKalk/icsmerger/issues/151)) ([961e8b1](https://github.com/KingOfKalk/icsmerger/commit/961e8b1e4f5f8f268c03261bc37259d4c9770065))
+* **deps:** Bump certifi from 2025.8.3 to 2025.10.5 ([#161](https://github.com/KingOfKalk/icsmerger/issues/161)) ([bfe44b9](https://github.com/KingOfKalk/icsmerger/commit/bfe44b9a2dba13309a7dc6ff13608c7efb48829a))
+* **deps:** Bump charset-normalizer from 3.4.2 to 3.4.3 ([#152](https://github.com/KingOfKalk/icsmerger/issues/152)) ([ad4d3a1](https://github.com/KingOfKalk/icsmerger/commit/ad4d3a141c3d24756ee01e1f598305421272c6ba))
+* **deps:** Bump charset-normalizer from 3.4.3 to 3.4.4 ([#167](https://github.com/KingOfKalk/icsmerger/issues/167)) ([95bc550](https://github.com/KingOfKalk/icsmerger/commit/95bc550d3bae66626f32dceab6128ede13c93b74))
+* **deps:** Bump click from 8.2.1 to 8.3.0 ([#159](https://github.com/KingOfKalk/icsmerger/issues/159)) ([a6c30cc](https://github.com/KingOfKalk/icsmerger/commit/a6c30cc066655f8e81a1f423bba4afb46ff3de7c))
+* **deps:** Bump click from 8.3.0 to 8.3.1 ([#175](https://github.com/KingOfKalk/icsmerger/issues/175)) ([038e997](https://github.com/KingOfKalk/icsmerger/commit/038e99753dee40d1bd4eeaafc5a01763ae0b98b2))
+* **deps:** Bump github/codeql-action from 3 to 4 ([#165](https://github.com/KingOfKalk/icsmerger/issues/165)) ([28cce82](https://github.com/KingOfKalk/icsmerger/commit/28cce826f2305ec2fb3ec3f0d2fcfad808152052))
+* **deps:** Bump idna from 3.10 to 3.11 ([#166](https://github.com/KingOfKalk/icsmerger/issues/166)) ([2581ad0](https://github.com/KingOfKalk/icsmerger/commit/2581ad0296cd55e257bc280ffc375646008b5b17))
+* **deps:** Bump requests from 2.32.4 to 2.32.5 ([#154](https://github.com/KingOfKalk/icsmerger/issues/154)) ([1efb63e](https://github.com/KingOfKalk/icsmerger/commit/1efb63e826cf71dc7afdb5aea5d51876817b1f28))
+* **deps:** Bump tatsu from 5.13.2 to 5.14.0 ([#182](https://github.com/KingOfKalk/icsmerger/issues/182)) ([2bec604](https://github.com/KingOfKalk/icsmerger/commit/2bec6044a943d513cdc16586ebc7d6b520a0cdc8))
+* **deps:** Bump tatsu from 5.14.0 to 5.15.1 ([#184](https://github.com/KingOfKalk/icsmerger/issues/184)) ([6e1b35e](https://github.com/KingOfKalk/icsmerger/commit/6e1b35ea99d8e7f68ca6d286bc3daac63114d09f))
+* **deps:** Bump tatsu from 5.8.3 to 5.13.2 ([#160](https://github.com/KingOfKalk/icsmerger/issues/160)) ([baad9bb](https://github.com/KingOfKalk/icsmerger/commit/baad9bbbba28c19e274bc46b488156b7793578ba))
+* **deps:** Bump urllib3 from 2.5.0 to 2.6.0 ([#176](https://github.com/KingOfKalk/icsmerger/issues/176)) ([ca0c98e](https://github.com/KingOfKalk/icsmerger/commit/ca0c98e8b6526474794d5b74c84af29b48bcd60f))
+* **deps:** Bump urllib3 from 2.6.0 to 2.6.1 ([#179](https://github.com/KingOfKalk/icsmerger/issues/179)) ([55aad39](https://github.com/KingOfKalk/icsmerger/commit/55aad3989f215c90a6b7f11d6f971be202b7669c))
+* **deps:** Bump urllib3 from 2.6.1 to 2.6.2 ([#180](https://github.com/KingOfKalk/icsmerger/issues/180)) ([3ead522](https://github.com/KingOfKalk/icsmerger/commit/3ead522aadd944698e996581f4f3533ca507df13))
+* **deps:** Bump urllib3 from 2.6.2 to 2.6.3 ([#185](https://github.com/KingOfKalk/icsmerger/issues/185)) ([17096f0](https://github.com/KingOfKalk/icsmerger/commit/17096f0598092e4904a1af2d6dd93a701ae1223e))
+* **github:** [#174](https://github.com/KingOfKalk/icsmerger/issues/174): Removes deprecated CODEQL_PYTHON and setup-python-dependencies. ([#178](https://github.com/KingOfKalk/icsmerger/issues/178)) ([ba3757a](https://github.com/KingOfKalk/icsmerger/commit/ba3757a3cfde1457b5e810a9d81f7348bf378339))
+
 ## [v1.1.0] - 2025-07-18
 
 - chore(deps): Bump urllib3 from 2.4.0 to 2.5.0 (#148)
