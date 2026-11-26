@@ -2,6 +2,20 @@
 
 This is a list of notable changes to the project.
 
+## [1.2.1](https://github.com/KingOfKalk/icsmerger/compare/v1.2.0...v1.2.1) (2026-11-26)
+
+
+### Bug Fixes
+
+* **deps:** Bump idna from 3.11 to 3.15 ([#207](https://github.com/KingOfKalk/icsmerger/issues/207)) ([8fb2d44](https://github.com/KingOfKalk/icsmerger/commit/8fb2d44a383a61e3f197633dbefb204c33338bde))
+* **deps:** Bump requests from 2.32.5 to 2.33.0 ([#209](https://github.com/KingOfKalk/icsmerger/issues/209)) ([a245583](https://github.com/KingOfKalk/icsmerger/commit/a2455835bffb45d956d8094a5c587884ed6e0e35))
+* **deps:** Bump urllib3 from 2.6.3 to 2.8.0 ([#208](https://github.com/KingOfKalk/icsmerger/issues/208)) ([f1f2e26](https://github.com/KingOfKalk/icsmerger/commit/f1f2e267e0fac59d141570caaa99273a8e4fd0db))
+
+
+### Chores
+
+* **deps-dev:** Bump pytest from 9.0.2 to 9.0.3 ([#210](https://github.com/KingOfKalk/icsmerger/issues/210)) ([9e5ae6b](https://github.com/KingOfKalk/icsmerger/commit/9e5ae6b48e55e025a9cf61c97228cea7079d0ee9))
+
 ## [1.2.0](https://github.com/KingOfKalk/icsmerger/compare/v1.1.0...v1.2.0) (2026-11-26)
 
 
