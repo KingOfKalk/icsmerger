@@ -92,11 +92,25 @@ With this you do not rely on *stdout* when merging ICS in a Docker setup.
 
 #### Example
 
-The following example will create a merged ics file called demo.ics in the current working directory.
+The following example will create a merged ics file called demo.ics in the *demo* directory of the current working directory.
 
 ```
-docker run -v ./demo:/app/output ghcr.io/kingofkalk/icsmerger:latest -o demo.ics https://example.com/demo1.ics https://example.com/demo2.ics
+mkdir -p demo
+docker run --user "$(id -u):$(id -g)" -v ./demo:/app/output ghcr.io/kingofkalk/icsmerger:latest -o demo.ics https://example.com/demo1.ics https://example.com/demo2.ics
 ```
+
+### User
+
+The image runs as the non-root user with UID/GID 10001, not as root.
+
+- With a bind mount, pass `--user` with the owner of the host directory (as above), or make the directory writable for UID 10001.
+- Docker creates a missing host directory as root, so create it first (`mkdir -p demo`).
+- Without a bind mount, */app/output* inside the container is writable for the image user.
+
+#### Upgrading from 1.x
+
+Up to 1.x the image ran as root, so writing into any bind mount worked.
+Since 2.0.0 the example above fails with a permission error without `--user` or a writable directory.
 
 ## Development
 
