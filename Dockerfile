@@ -25,7 +25,14 @@ RUN --mount=type=bind,from=build,source=/dist,target=/dist \
     --mount=type=bind,source=requirements.txt,target=/requirements.txt \
     pip3 install --no-cache-dir -r /requirements.txt /dist/*.whl
 
+# Run as a dedicated non-root user. The numeric UID lets Kubernetes runAsNonRoot verify it.
+RUN addgroup -S -g 10001 icsmerger \
+    && adduser -S -D -H -u 10001 -G icsmerger icsmerger \
+    && mkdir -p /app/output \
+    && chown 10001:10001 /app/output
+
 WORKDIR /app/output
+USER 10001:10001
 
 ENTRYPOINT ["icsmerger"]
 CMD ["-h"]
