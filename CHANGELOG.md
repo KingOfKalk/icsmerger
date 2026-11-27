@@ -2,6 +2,17 @@
 
 This is a list of notable changes to the project.
 
+## [2.0.0](https://github.com/KingOfKalk/icsmerger/compare/v1.2.2...v2.0.0) (2026-11-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **docker:** run the production image as a non-root user ([#234](https://github.com/KingOfKalk/icsmerger/issues/234))
+
+### Bug Fixes
+
+* **docker:** run the production image as a non-root user ([#234](https://github.com/KingOfKalk/icsmerger/issues/234)) ([9efbed2](https://github.com/KingOfKalk/icsmerger/commit/9efbed20d022bb3afc607c252c6c7582cd480c4f))
+
 ## [1.2.2](https://github.com/KingOfKalk/icsmerger/compare/v1.2.1...v1.2.2) (2026-11-27)
 
 
