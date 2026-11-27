@@ -1,92 +1,114 @@
-import unittest
+"""
+Round-trip tests through the CLI with real ICS parsing and serialising.
+Only requests.get is mocked.
+"""
 import unittest.mock
+import warnings
 
 import click.testing
+import pytest
+import requests
 
 from icsmerger import merge
+from icsmerger.tests.helpers import make_ics, make_response
+
+GOOD = "https://feed.test/good.ics"
+GOOD2 = "https://feed.test/good2.ics"
+BAD = "https://feed.test/bad.ics"
+
+FAILURES = {
+    "404": lambda: make_response("Not found", status=404, content_type="text/plain"),
+    "204": lambda: make_response(b"", status=204, content_type=None),
+    "html": lambda: make_response("<html><body>Login</body></html>", content_type="text/html"),
+    "connection-refused": lambda: requests.exceptions.ConnectionError("Connection refused"),
+    "timeout": lambda: requests.exceptions.Timeout("Read timed out"),
+}
 
 
-class TestMain(unittest.TestCase):
+def run(feeds: dict, *args):
     """
-    See https://click.palletsprojects.com/en/8.0.x/testing/
+    Invokes the CLI; feeds maps URL to a Response or an exception to raise.
     """
+    def fake_get(url, **kwargs):
+        feed = feeds[url]
+        if isinstance(feed, Exception):
+            raise feed
+        return feed
 
-    @unittest.mock.patch("builtins.print")
-    @unittest.mock.patch("ics.Calendar")
-    @unittest.mock.patch("icsmerger.merge.create_calendar")
-    @unittest.mock.patch("icsmerger.merge.get_events")
-    @unittest.mock.patch("icsmerger.merge.get_ics")
-    def test_without_out(self, get_ics_mock: unittest.mock.MagicMock, get_events_mock: unittest.mock.MagicMock, create_calendar_mock: unittest.mock.MagicMock, calendar_mock: unittest.mock.MagicMock, print_mock: unittest.mock.MagicMock):
-        url = "http://foo.bar"
-        arguments = [
-            url,
-        ]
-        ics_content = "foo"
-        get_ics_mock.return_value = ics_content
-        event = "a event"
-        events = [event]
-        get_events_mock.return_value = events
-
-        calendar_str = "bar"
-        create_calendar_mock.return_value = calendar_str
-
-        runner = click.testing.CliRunner()
-        actual = runner.invoke(merge.main, arguments)
-        self.assertEqual(actual.exit_code, 0)
-        self.assertEqual(actual.output, "")
-        get_ics_mock.assert_called_once_with(url, True)
-        get_events_mock.assert_called_once_with(ics_content)
-        create_calendar_mock.assert_called_once_with(events)
-        print_mock.assert_called_once_with(calendar_str)
-
-    @unittest.mock.patch("builtins.print")
-    @unittest.mock.patch("icsmerger.merge.save_calendar")
-    @unittest.mock.patch("icsmerger.merge.create_calendar")
-    @unittest.mock.patch("icsmerger.merge.get_events")
-    @unittest.mock.patch("icsmerger.merge.get_ics")
-    def test_with_out(self, get_ics_mock: unittest.mock.MagicMock, get_events_mock: unittest.mock.MagicMock, create_calendar_mock: unittest.mock.MagicMock, save_calendar_mock: unittest.mock.MagicMock, print_mock: unittest.mock.MagicMock):
-        url = "http://foo.bar"
-        out = 'test.ics'
-        arguments = [
-            url,
-            '--out',
-            out
-        ]
-        ics_content = "foo"
-        get_ics_mock.return_value = ics_content
-        event = "a event"
-        events = [event]
-        get_events_mock.return_value = events
-
-        calendar_str = "bar"
-        create_calendar_mock.return_value = calendar_str
-
-        runner = click.testing.CliRunner()
-        actual = runner.invoke(merge.main, arguments)
-        self.assertEqual(actual.exit_code, 0)
-        self.assertEqual(actual.output, "")
-        get_ics_mock.assert_called_once_with(url, True)
-        get_events_mock.assert_called_once_with(ics_content)
-        create_calendar_mock.assert_called_once_with(events)
-        print_mock.assert_not_called()
-        save_calendar_mock.assert_called_once_with(calendar_str, out)
-
-    @unittest.mock.patch("builtins.print")
-    @unittest.mock.patch("ics.Calendar")
-    @unittest.mock.patch("icsmerger.merge.create_calendar")
-    @unittest.mock.patch("icsmerger.merge.get_events")
-    @unittest.mock.patch("icsmerger.merge.get_ics")
-    def test_with_ingore_http_error_option(self, get_ics_mock: unittest.mock.MagicMock, get_events_mock: unittest.mock.MagicMock, create_calendar_mock: unittest.mock.MagicMock, calendar_mock: unittest.mock.MagicMock, print_mock: unittest.mock.MagicMock):
-        url = "http://foo.bar"
-        arguments = [
-            "--ignore-http-errors",
-            url,
-        ]
-
-        runner = click.testing.CliRunner()
-        runner.invoke(merge.main, arguments)
-        get_ics_mock.assert_called_once_with(url, False)
+    with unittest.mock.patch("requests.get", side_effect=fake_get):
+        return click.testing.CliRunner().invoke(merge.main, [*args, *feeds])
 
 
-if __name__ == "__main__":
-    unittest.main()
+def summaries(output: str) -> list:
+    return sorted(line[len("SUMMARY:"):] for line in output.splitlines() if line.startswith("SUMMARY:"))
+
+
+def test_two_feeds_are_merged():
+    result = run({
+        GOOD: make_response(make_ics(("1", "One"))),
+        GOOD2: make_response(make_ics(("2", "Two"), ("3", "Three"))),
+    })
+    assert result.exit_code == 0
+    assert summaries(result.stdout) == ["One", "Three", "Two"]
+    assert result.stderr == ""
+
+
+def test_utf8_without_charset_on_stdout_and_in_file(tmp_path):
+    feeds = {GOOD: make_response(make_ics(("1", "Müller Straße Café")), content_type="text/calendar")}
+    result = run(feeds)
+    assert result.exit_code == 0
+    assert "SUMMARY:Müller Straße Café" in result.stdout
+
+    out = tmp_path / "out.ics"
+    result = run(feeds, "-o", str(out))
+    assert result.exit_code == 0
+    assert "SUMMARY:Müller Straße Café" in out.read_text(encoding="utf-8")
+
+
+def test_stdout_and_file_are_identical_and_warning_free(tmp_path):
+    def feeds():
+        return {GOOD: make_response(make_ics(("1", "One"), ("2", "Two")))}
+
+    out = tmp_path / "out.ics"
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", FutureWarning)
+        stdout_result = run(feeds())
+        file_result = run(feeds(), "-o", str(out))
+    assert stdout_result.exit_code == 0
+    assert file_result.exit_code == 0
+    assert stdout_result.stdout_bytes == out.read_bytes()
+    assert stdout_result.stderr == ""
+    assert file_result.stdout == ""
+
+
+@pytest.mark.parametrize("failure", FAILURES)
+def test_failure_exits_with_message_naming_the_url(failure):
+    result = run({GOOD: make_response(make_ics(("1", "One"))), BAD: FAILURES[failure]()})
+    assert result.exit_code == 1
+    assert result.stdout == ""
+    assert result.stderr.startswith(f"Error: {BAD}: ")
+
+
+@pytest.mark.parametrize("failure", FAILURES)
+def test_ignore_http_errors_skips_the_failed_feed(failure):
+    result = run({GOOD: make_response(make_ics(("1", "One"))), BAD: FAILURES[failure]()}, "--ignore-http-errors")
+    assert result.exit_code == 0
+    assert summaries(result.stdout) == ["One"]
+    assert BAD in result.stderr
+    assert GOOD not in result.stderr
+
+
+@pytest.mark.parametrize("failure", FAILURES)
+def test_ignore_http_errors_with_all_feeds_failing_gives_empty_calendar(failure, tmp_path):
+    feeds = {BAD: FAILURES[failure](), GOOD: FAILURES[failure]()}
+    result = run(feeds, "--ignore-http-errors")
+    assert result.exit_code == 0
+    assert "BEGIN:VCALENDAR" in result.stdout
+    assert "BEGIN:VEVENT" not in result.stdout
+    assert BAD in result.stderr
+    assert GOOD in result.stderr
+
+    out = tmp_path / "out.ics"
+    result = run(feeds, "--ignore-http-errors", "-o", str(out))
+    assert result.exit_code == 0
+    assert "BEGIN:VCALENDAR" in out.read_text(encoding="utf-8")
