@@ -2,6 +2,30 @@
 
 This is a list of notable changes to the project.
 
+## [1.2.2](https://github.com/KingOfKalk/icsmerger/compare/v1.2.1...v1.2.2) (2026-11-27)
+
+
+### Bug Fixes
+
+* **docker:** build a slim production stage ([#231](https://github.com/KingOfKalk/icsmerger/issues/231)) ([7f41be0](https://github.com/KingOfKalk/icsmerger/commit/7f41be01e0d230febaad59298de5fed612c07a72))
+* **docker:** bump base image to python 3.14 on alpine 3.24 ([#226](https://github.com/KingOfKalk/icsmerger/issues/226)) ([ced0957](https://github.com/KingOfKalk/icsmerger/commit/ced09575313ee89f9bef11636e338a0add1a1a1e))
+* **merge:** handle HTTP errors, timeouts and encoding ([#229](https://github.com/KingOfKalk/icsmerger/issues/229)) ([25c5fe0](https://github.com/KingOfKalk/icsmerger/commit/25c5fe0dac89e96bfa0571000ae4759f5c214ea4))
+
+
+### Documentation
+
+* **readme:** fix badges, image name and paths ([#225](https://github.com/KingOfKalk/icsmerger/issues/225)) ([3459d78](https://github.com/KingOfKalk/icsmerger/commit/3459d78613a71f450ac27d01c3babaa99d363132))
+
+
+### Build System
+
+* **packaging:** remove dead config and keep tests out of the wheel ([#227](https://github.com/KingOfKalk/icsmerger/issues/227)) ([52f21dd](https://github.com/KingOfKalk/icsmerger/commit/52f21dda8fe17ff1b2a2145e9f02e7e3c765c2fc))
+
+
+### Continuous Integration
+
+* **workflows:** least-privilege App tokens and job timeouts ([#228](https://github.com/KingOfKalk/icsmerger/issues/228)) ([e16d4b5](https://github.com/KingOfKalk/icsmerger/commit/e16d4b54d6541dd5fac5a1207f033760edb846aa))
+
 ## [1.2.1](https://github.com/KingOfKalk/icsmerger/compare/v1.2.0...v1.2.1) (2026-11-26)
 
 
