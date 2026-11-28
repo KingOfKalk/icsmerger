@@ -2,6 +2,13 @@
 
 This is a list of notable changes to the project.
 
+## [2.0.1](https://github.com/KingOfKalk/icsmerger/compare/v2.0.0...v2.0.1) (2026-11-28)
+
+
+### Bug Fixes
+
+* **deps:** Bump python from 3.14.10-alpine3.24 to 3.15.2-alpine3.24 ([#236](https://github.com/KingOfKalk/icsmerger/issues/236)) ([da8de35](https://github.com/KingOfKalk/icsmerger/commit/da8de359fd1b5c67c09ac5545072f5bcddbb8adb))
+
 ## [2.0.0](https://github.com/KingOfKalk/icsmerger/compare/v1.2.2...v2.0.0) (2026-11-27)
 
 
