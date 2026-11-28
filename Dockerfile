@@ -1,6 +1,6 @@
 # Dependabot keeps the -alpineX.Y suffix; bump it by hand when a new Alpine release is out.
 # The base image is repeated in the build and production stages so Dependabot finds both.
-FROM docker.io/python:3.14.10-alpine3.24 AS build
+FROM docker.io/python:3.15.2-alpine3.24 AS build
 
 # git and .git are needed at build time only: setuptools_scm derives the version from the tag.
 RUN apk add --no-cache git
@@ -17,7 +17,7 @@ FROM build AS test
 RUN pip3 install --editable .
 RUN pytest --no-cov .
 
-FROM docker.io/python:3.14.10-alpine3.24 AS production
+FROM docker.io/python:3.15.2-alpine3.24 AS production
 
 # Runtime dependencies and the wheel only: no git, .git, tests or source tree.
 # Bind mounts keep requirements.txt and the wheel out of the image layers.
